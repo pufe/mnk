@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100">
+  <circle cx="0" cy="0" r="48" stroke="black" stroke-width="1" fill="none" />
+    <path d="M 0.00,45.00L -38.97,22.50L -38.97,-22.50L -0.00,-45.00L 38.97,-22.50L 38.97,22.50L 0.00,45.00Z" stroke="black" stroke-width="1" fill="#22bbcc" />
+
+    <path d="M 0.00,24.00L -20.78,12.00L -20.78,-12.00L -0.00,-24.00L 20.78,-12.00L 20.78,12.00L 0.00,24.00Z" stroke="black" stroke-width="1" fill="#22bbcc" />
+
+</svg>

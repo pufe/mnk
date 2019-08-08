@@ -2,6 +2,7 @@
   <meta charset="utf-8">
   <head>
     <script>
+    var cards=[];
     function dragStart(event) {
       var target = event.currentTarget;
       event.dataTransfer.setData("html", target.outerHTML);
@@ -27,7 +28,25 @@
     function allowDrop(event) {
       event.preventDefault();
     }
+    function init() {
+      for(var i=0; i<25; ++i)
+        cards.push(i);
+    }
+    function buildImg(value) {
+      return "<img src=\"assets/card-"+value+".svg\">";
+    }
+    function getCard() {
+      var index = Math.floor(Math.random() * (cards.length));
+      var value = cards.splice(index, 1)[0];
+      console.log(value);
+      document.getElementById("count").innerHTML = cards.length;
+      var container = document.getElementById("new");
+      console.log(buildImg(value));
+      container.insertAdjacentHTML('beforeend', buildImg(value));
+      setupImg(container.lastElementChild);
+    }
     document.addEventListener("DOMContentLoaded", function() {
+      init();
       var imgList = document.getElementsByTagName("img");
       for(var img of imgList) {
         setupImg(img);
@@ -37,6 +56,7 @@
         td.addEventListener("dragover", allowDrop);
         td.addEventListener("drop", drop);
       }
+      document.getElementById("deck").addEventListener("click", getCard);
     });
     </script>
     <style>
@@ -47,63 +67,76 @@
        border: 1px solid black;
        width: 100px;
        height: 100px;
+       text-align: center;
+
      }
      img {
        width: 100px;
        height: 100px;
      }
-     div {
-       display: inline-block;
-       width: 100px;
-       height: 100px;
-       border: 1px solid red;
+     .flexbox {
+       display: flex;
+       justify-content: space-around;
+     }
+     .hands {
+       display: flex;
+       justify-content: space-between;
+       flex-direction: column;
+     }
+     .big {
+       font-size: 48px;
      }
     </style>
   </head>
   <body>
-    <table>
-      <tr>
-        <td><img src="assets/card-0.svg"></td>
-        <td><img src="assets/card-1.svg"></td>
-        <td><img src="assets/card-2.svg"></td>
-        <td><img src="assets/card-3.svg"></td>
-        <td><img src="assets/card-4.svg"></td>
-      </tr>
-      <tr>
-        <td><img src="assets/card-5.svg"></td>
-        <td><img src="assets/card-6.svg"></td>
-        <td><img src="assets/card-7.svg"></td>
-        <td><img src="assets/card-8.svg"></td>
-        <td><img src="assets/card-9.svg"></td>
-      </tr>
-      <tr>
-        <td><img src="assets/card-10.svg"></td>
-        <td><img src="assets/card-11.svg"></td>
-        <td><img src="assets/card-12.svg"></td>
-        <td><img src="assets/card-13.svg"></td>
-        <td><img src="assets/card-14.svg"></td>
-      </tr>
-      <tr>
-        <td><img src="assets/card-15.svg"></td>
-        <td><img src="assets/card-16.svg"></td>
-        <td><img src="assets/card-17.svg"></td>
-        <td><img src="assets/card-18.svg"></td>
-        <td><img src="assets/card-19.svg"></td>
-      </tr>
-      <tr>
-        <td><img src="assets/card-20.svg"></td>
-        <td><img src="assets/card-21.svg"></td>
-        <td><img src="assets/card-22.svg"></td>
-        <td><img src="assets/card-23.svg"></td>
-        <td><img src="assets/card-24.svg"></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
+    <div class="flexbox">
+      <div class="deck">
+        <table>
+          <tr><th>Deck</th></tr>
+          <tr><td id="deck"><span id="count" class="big">25</span><br>cards left</td></tr>
+          <tr><td id="new"></td></tr>
+        </table>
+      </div>
+      <div class="board">
+        <table>
+          <tr>
+            <th colspan="5">Board</th>
+          </tr>
+          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td>
+          </tr>
+          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td>
+          </tr>
+          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td>
+          </tr>
+          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td>
+          </tr>
+          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td>
+          </tr>
+        </table>
+      </div>
+      <div class="hands">
+        <table>
+          <tr><th colspan="3">Player 1</th></tr>
+          <tr><td></td> <td></td> <td></td></tr>
+        </table>
+        <table>
+          <tr><th colspan="3">Player 2</th></tr>
+          <tr><td></td> <td></td> <td></td></tr>
+        </table>
+        <table>
+          <tr><th colspan="3">Player 3</th></tr>
+          <tr><td></td> <td></td> <td></td></tr>
+        </table>
+        <table>
+          <tr><th colspan="3">Player 4</th></tr>
+          <tr><td></td> <td></td> <td></td></tr>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
